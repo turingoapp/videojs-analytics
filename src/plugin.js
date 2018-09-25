@@ -3,7 +3,6 @@ import videojs from 'video.js';
 // Default options for the plugin.
 const defaults = {
   events: [],
-  assetName: 'Video',
   defaultVideoCategory: 'Video',
   defaultAudioCategory: 'Audio'
 };
@@ -68,7 +67,6 @@ const analytics = function(options) {
 
     function play(player, event) {
       track(player, event.action, event.label);
-      track(player, 'Asset name', options.assetName);
     }
 
     function pause(player, event) {
@@ -107,17 +105,17 @@ const analytics = function(options) {
       let percent = Math.round(elapsed / duration * 100);
 
       if (!progress.quarter && percent > 25) {
-        track(player, event.action, 'Complete 25%');
+        track(player, event.action, event.label.q1 || 'Complete 25%');
         progress.quarter = true;
       }
 
       if (!progress.half && percent > 50) {
-        track(player, event.action, 'Complete 50%');
+        track(player, event.action, event.label.q2 || 'Complete 50%');
         progress.half = true;
       }
 
       if (!progress.threeQuarters && percent > 75) {
-        track(player, event.action, 'Complete 75%');
+        track(player, event.action, event.label.q3 || 'Complete 75%');
         progress.threeQuarters = true;
       }
     }

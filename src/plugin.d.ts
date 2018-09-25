@@ -15,6 +15,7 @@ declare namespace analytics {
         action: string
     }
 
+    // Self-explanatory
     export type EventPlay             = Event<'play',             string>
     export type EventPause            = Event<'pause',            string>
     export type EventEnded            = Event<'ended',            string>
@@ -22,14 +23,34 @@ declare namespace analytics {
     export type EventResize           = Event<'resize',           string>
     export type EventError            = Event<'error',            string>
     export type EventResolutionChange = Event<'resolutionchange', undefined>
-    export type EventTimeUpdate       = Event<'timeupdate',       undefined>
+
+    /**
+     * Event when time changes
+     * 
+     * Accepts a triple label: {
+     *  q1: passed the first quarter mark (25%)
+     *  q2: passed the second quarter mark (50%)
+     *  q3: passed the third quarter mark (75%)
+     * }
+     * 
+     * q0 (0%) and q4 (100%) are not implemented, but are the same as checking for EventPlay / EventEnded
+     */
+    export type EventTimeUpdate = Event<'timeupdate', { q1: string, q2: string, q3: string }>
+
+    /**
+     * Alerts when the user has entered or left full screen.
+     * 
+     * Accepts the labels: {
+     *  open: Opened full screen
+     *  exit: Left fullscreen
+     * }
+     */
     export type EventFullScreenChange = Event<'fullscreenchange', { open: string, exit: string}>
 
     export type Events = EventPlay | EventPause | EventEnded | EventVolumeChange | EventResize | EventError | EventResolutionChange | EventTimeUpdate | EventFullScreenChange
     export type Options = {
         mode: 'GA' | 'GTAG'
         events: Array<Events>
-        assetName?: string
         defaultAudioCategory?: string
         defaultVideoCategory?: string
     }

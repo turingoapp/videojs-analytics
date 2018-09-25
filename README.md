@@ -174,6 +174,11 @@ player.analytics({
     },
     {
       name: 'timeupdate',
+      label: {
+        q1: 'video has reached 25%'
+        q2: 'video has reached 50%'
+        q3: 'video has reached 75%'
+      }
       action: 'time updated',
     }
   ]
