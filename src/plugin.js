@@ -59,7 +59,7 @@ const analytics = function(options) {
       if (options.mode === analyticsMode.googleTags) {
         window.gtag('event', action,
         /* eslint camelcase: 0 */
-        {event_category: category, event_label: label, customDimensions});
+        {event_category: category, event_label: label, customDimensions: customDimensions});
       } else {
         window.ga('send', 'event', category, action, label);
       }
