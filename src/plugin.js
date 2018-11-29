@@ -36,7 +36,7 @@ const analytics = function(options) {
 
   options = videojs.mergeOptions(defaults, options);
 
-  this.ready(() => {
+  this.ready(function () {
 
     let progress = {
       quarter: false,
