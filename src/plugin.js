@@ -142,7 +142,7 @@ const analytics = function(options) {
       this.one('play', function() {
         play(this, playEvent);
       });
-      options.events = options.events.filter((event) => {
+      options.events = options.events.filter(function (event) {
         return event.name !== 'play';
       });
     }
@@ -153,7 +153,7 @@ const analytics = function(options) {
       this.one('pause', function() {
         pause(this, pauseEvent);
       });
-      options.events = options.events.filter((event) => {
+      options.events = options.events.filter(function (event) {
         return event.name !== 'pause';
       });
     }
@@ -164,7 +164,7 @@ const analytics = function(options) {
       this.one('ended', function() {
         ended(this, endedEvent);
       });
-      options.events = options.events.filter((event) => {
+      options.events = options.events.filter(function (event) {
         return event.name !== 'ended';
       });
     }
@@ -175,7 +175,7 @@ const analytics = function(options) {
       this.on('resolutionchange', function() {
         resolutionchange(this, resolutionchangeEvent);
       });
-      options.events = options.events.filter((event) => {
+      options.events = options.events.filter(function (event) {
         return event.name !== 'resolutionchange';
       });
     }
@@ -186,7 +186,7 @@ const analytics = function(options) {
       this.on('fullscreenchange', function() {
         fullscreenchange(this, fullscreenEvent);
       });
-      options.events = options.events.filter((event) => {
+      options.events = options.events.filter(function (event) {
         return event.name !== 'fullscreenchange';
       });
     }
@@ -197,7 +197,7 @@ const analytics = function(options) {
       this.on('timeupdate', function() {
         timeupdate(this, timeupdateEvent);
       });
-      options.events = options.events.filter((event) => {
+      options.events = options.events.filter(function (event) {
         return event.name !== 'timeupdate';
       });
     }
