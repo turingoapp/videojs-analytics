@@ -204,11 +204,11 @@ const analytics = function(options) {
 
     // For any other event that doesn't require special processing
     // we will use the handleEvent event handler
-    for (let event of options.events) {
+    options.events.forEach(function (event) {
       this.on(event.name, function() {
         handleEvent(this, event);
       });
-    }
+    });
 
   });
 
