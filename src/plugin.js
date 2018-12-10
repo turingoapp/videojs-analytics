@@ -202,11 +202,14 @@ const analytics = function(options) {
       });
     }
 
+    // Because this sucks
+    const _t = this
+
     // For any other event that doesn't require special processing
     // we will use the handleEvent event handler
     options.events.forEach(function (event) {
-      this.on(event.name, function() {
-        handleEvent(this, event);
+      _t.on(event.name, function() {
+        handleEvent(_t, event);
       });
     });
 
