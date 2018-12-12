@@ -1,13 +1,13 @@
 import videojs from 'video.js';
 
 // Default options for the plugin.
-const defaults = {
+var defaults = {
   events: [],
   defaultVideoCategory: 'Video',
   defaultAudioCategory: 'Audio'
 };
 
-const analyticsMode = {
+var analyticsMode = {
   googleAnalytics: 'GA',
   googleTags: 'GTAG'
 };
@@ -32,21 +32,21 @@ window.gtag = window.gtag || function() {
  * @param    {Object} [options={}]
  *           An object of options left to the plugin author to define.
  */
-const analytics = function(options) {
+var analytics = function(options) {
 
   options = videojs.mergeOptions(defaults, options);
 
   this.ready(function () {
 
-    let progress = {
+    var progress = {
       quarter: false,
       half: false,
       threeQuarters: false
     };
 
     function track(player, action, label) {
-      let category = options.defaultVideoCategory;
-      let customDimensions = options.customDimensions || {};
+      var category = options.defaultVideoCategory;
+      var customDimensions = options.customDimensions || {};
 
       if (player.isAudio()) {
         category = options.defaultAudioCategory;
@@ -78,13 +78,13 @@ const analytics = function(options) {
     }
 
     function fullscreenchange(player, event) {
-      const label = player.isFullscreen() ? event.label.open : event.label.exit;
+      var label = player.isFullscreen() ? event.label.open : event.label.exit;
 
       track(player, event.action, label);
     }
 
     function resolutionchange(player, event) {
-      let resolution = {
+      var resolution = {
         label: ''
       };
 
@@ -94,15 +94,15 @@ const analytics = function(options) {
       if (player.currentResolution) {
         resolution = player.currentResolution();
       }
-      let label = resolution.label ? resolution.label : 'Default';
+      var label = resolution.label ? resolution.label : 'Default';
 
       track(player, event.action, label);
     }
 
     function timeupdate(player, event) {
-      let elapsed = Math.round(player.currentTime());
-      let duration = Math.round(player.duration());
-      let percent = Math.round(elapsed / duration * 100);
+      var elapsed = Math.round(player.currentTime());
+      var duration = Math.round(player.duration());
+      var percent = Math.round(elapsed / duration * 100);
 
       if (!progress.quarter && percent > 25) {
         track(player, event.action, event.label.q1 || 'Complete 25%');
@@ -132,12 +132,12 @@ const analytics = function(options) {
 
     // Set up the custom event tracking that won't use handleEvents
 
-    const eventNames = options.events.map(function(event) {
+    var eventNames = options.events.map(function(event) {
       return event.name || event;
     });
 
     if (eventNames.indexOf('play') > -1) {
-      const playEvent = getEvent('play');
+      var playEvent = getEvent('play');
 
       this.one('play', function() {
         play(this, playEvent);
@@ -148,7 +148,7 @@ const analytics = function(options) {
     }
 
     if (eventNames.indexOf('pause') > -1) {
-      const pauseEvent = getEvent('pause');
+      var pauseEvent = getEvent('pause');
 
       this.one('pause', function() {
         pause(this, pauseEvent);
@@ -159,7 +159,7 @@ const analytics = function(options) {
     }
 
     if (eventNames.indexOf('ended') > -1) {
-      const endedEvent = getEvent('ended');
+      var endedEvent = getEvent('ended');
 
       this.one('ended', function() {
         ended(this, endedEvent);
@@ -170,7 +170,7 @@ const analytics = function(options) {
     }
 
     if (eventNames.indexOf('resolutionchange') > -1) {
-      const resolutionchangeEvent = getEvent('resolutionchange');
+      var resolutionchangeEvent = getEvent('resolutionchange');
 
       this.on('resolutionchange', function() {
         resolutionchange(this, resolutionchangeEvent);
@@ -181,7 +181,7 @@ const analytics = function(options) {
     }
 
     if (eventNames.indexOf('fullscreenchange') > -1) {
-      const fullscreenEvent = getEvent('fullscreenchange');
+      var fullscreenEvent = getEvent('fullscreenchange');
 
       this.on('fullscreenchange', function() {
         fullscreenchange(this, fullscreenEvent);
@@ -192,7 +192,7 @@ const analytics = function(options) {
     }
 
     if (eventNames.indexOf('timeupdate') > -1) {
-      const timeupdateEvent = getEvent('timeupdate');
+      var timeupdateEvent = getEvent('timeupdate');
 
       this.on('timeupdate', function() {
         timeupdate(this, timeupdateEvent);
@@ -203,7 +203,7 @@ const analytics = function(options) {
     }
 
     // Because this sucks
-    const _t = this
+    var _t = this
 
     // For any other event that doesn't require special processing
     // we will use the handleEvent event handler
